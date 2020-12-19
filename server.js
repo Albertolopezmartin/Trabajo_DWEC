@@ -101,7 +101,7 @@ function getTexturesAvailables(players) {
 
   return textures;
 }
-
+/*
 server.listen(8000, function () {
   console.log(`Listening on http://localhost:${server.address().port}`);
-});
+});*/
