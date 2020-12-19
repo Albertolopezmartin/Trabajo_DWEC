@@ -18,7 +18,7 @@ Technologies used in the creation of this game:
 4. Open the terminal and run the command: npm install.
 5. When it has finished installing run the command: npm run start.
 6. In your web browser of choice navigate to http://localhost:8000/.
-7. Choose your character and happy gaming!
+7. Choose your character and you can now start playing.
 
 # Play it online now
 
