@@ -3,8 +3,6 @@ var platforms;
 class DisplayGame extends Phaser.Scene {
   constructor() {
     super("DisplayGame");
-
-    
   }
 
   init(data) {
@@ -93,16 +91,16 @@ class DisplayGame extends Phaser.Scene {
       self.bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
       self.allowGravity = false;
       self.physics.add.overlap(
-        self.ship,
+        self.char,
         self.bomb,
         function () {
           self.bomb.destroy();
-          self.ship.setTint(0xff0000);
+          self.char.setTint(0xff0000);
           self.youLooseText.setText("You Loose!");
           self.physics.pause();
-          /*this.youLooseText.setInteractive().on("pointerdown", () => {
+          self.youLooseText.setInteractive().on("pointerdown", () => {
             self.scene.start("Menu");
-          });*/
+          });
         },
         null,
         self
@@ -113,9 +111,10 @@ class DisplayGame extends Phaser.Scene {
     this.socket.on("starLocation", function (starLocation) {
       if (self.star) self.star.destroy();
       self.star = self.physics.add.image(starLocation.x, starLocation.y, "star");
+      self.star.setBounce(0.35);
       self.physics.add.collider(self.star, platforms);
       self.physics.add.overlap(
-        self.ship,
+        self.char,
         self.star,
         function () {
           this.socket.emit("starCollected");
@@ -137,7 +136,7 @@ class DisplayGame extends Phaser.Scene {
   } //CREATE
 
   update() {
-    if (this.ship) {
+    if (this.char) {
 
       if (
         this.cursors.left.isDown ||
@@ -147,51 +146,51 @@ class DisplayGame extends Phaser.Scene {
 
         if (this.cursors.left.isDown)
         {
-          this.ship.setVelocityX(-160);
+          this.char.setVelocityX(-160);
         }
         else if (this.cursors.right.isDown)
         {
-          this.ship.setVelocityX(160);
+          this.char.setVelocityX(160);
         }
 
-        if (this.cursors.up.isDown && this.ship.body.touching.down)
+        if (this.cursors.up.isDown && this.char.body.touching.down)
         {
-          this.ship.setVelocityY(-630);
+          this.char.setVelocityY(-530);
         }
 
       } else {
-        this.ship.setVelocity(0);
+        this.char.setVelocityX(0);
       }
 
-      this.ship.setBounce(0.2);
-      this.ship.setCollideWorldBounds(true);
+      this.char.setBounce(0.2);
+      this.char.setCollideWorldBounds(true);
 
-      var x = this.ship.x;
-      var y = this.ship.y;
+      var x = this.char.x;
+      var y = this.char.y;
 
       if (
-        this.ship.oldPosition &&
-        (x !== this.ship.oldPosition.x || y !== this.ship.oldPosition.y)
+        this.char.oldPosition &&
+        (x !== this.char.oldPosition.x || y !== this.char.oldPosition.y)
       ) {
         this.socket.emit("playerMovement", {
-          x: this.ship.x,
-          y: this.ship.y,
+          x: this.char.x,
+          y: this.char.y,
         });
       }
 
-      this.ship.oldPosition = {
-        x: this.ship.x,
-        y: this.ship.y,
+      this.char.oldPosition = {
+        x: this.char.x,
+        y: this.char.y,
       };
     }
   }
 }
 
 function addPlayer(self, playerInfo) {
-  self.ship = self.physics.add
+  self.char = self.physics.add
     .sprite(playerInfo.x, playerInfo.y, playerInfo.texture)
     .setOrigin(0.5, 0.5);
-  self.physics.add.collider(self.ship, platforms);
+  self.physics.add.collider(self.char, platforms);
 }
 
 function addOtherPlayers(self, playerInfo) {

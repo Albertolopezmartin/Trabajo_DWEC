@@ -8,10 +8,11 @@ class Full extends Phaser.Scene {
   }
 
   create() {
+    this.add.image(400, 300, 'sky');
     this.add.text(
-      this.config.width / 2 - 180,
+      this.config.width / 2 - 140,
       this.config.height / 2 - 40,
-      "There are already 2 players\nTry later!",
+      "THE ROOM IS FULL\nTRY AGAIN LATER!",
       { font: "30px Arial", fill: "yellow", align: "center" }
     );
   }

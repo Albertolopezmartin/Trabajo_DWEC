@@ -9,7 +9,7 @@ var bomb;
 
 var star = {
   x: Math.floor(Math.random() * 700) + 50,
-  y: Math.floor(Math.random() * 500) + 50,
+  y: (Math.random() * 400),
 };
 
 var bomb = {
@@ -41,9 +41,8 @@ io.on("connection", function (socket) {
 
   socket.on("texture selected", (textureSelected) => {
     players[socket.id] = {
-      rotation: 0,
       x: Math.floor(Math.random() * 700) + 50,
-      y: Math.floor(Math.random() * 500) + 50,
+      y: (Math.random() * 400),
       playerId: socket.id,
       team: Math.floor(Math.random() * 2) == 0 ? "red" : "blue",
       texture: textureSelected,
@@ -68,14 +67,6 @@ io.on("connection", function (socket) {
     socket.broadcast.emit("playerMoved", players[socket.id]);
   });
 
-  socket.on("bombHit", function () {
-    if (players[socket.id].team === "red") {
-      players[socket.id].setTint(0xff0000);
-    } else {
-      players[socket.id].setTint(0xff0000);
-    }
-  });
-
   socket.on("starCollected", function () {
     if (players[socket.id].team === "red") {
       scores.red += 10;
@@ -83,7 +74,7 @@ io.on("connection", function (socket) {
       scores.blue += 10;
     }
     star.x = Math.floor(Math.random() * 700) + 80;
-    star.y = Math.floor(Math.random() * 500) + 80;
+    star.y = (Math.random() * 400);
     io.emit("starLocation", star);
     io.emit("bombLocation", bomb);
     io.emit("scoreUpdate", scores);

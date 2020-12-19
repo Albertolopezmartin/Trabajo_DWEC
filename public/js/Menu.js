@@ -9,6 +9,7 @@ class Menu extends Phaser.Scene {
   }
 
   create() {
+    this.add.image(400, 300, 'sky');
     this.socket = io();
 
     this.socket.on("full room", () => {
@@ -19,7 +20,7 @@ class Menu extends Phaser.Scene {
     let sprite = [];
 
     this.socket.on("textures", (textures) => {
-      this.add.text(this.config.width / 2 - 140, this.config.height / 2 - 40, "Star Collector", {
+      this.add.text(this.config.width / 2 - 140, this.config.height / 2 - 40, "STAR COLLECTOR", {
         font: "30px Arial",
         fill: "yellow",
         align: "center",
@@ -33,7 +34,7 @@ class Menu extends Phaser.Scene {
 
       for (let i = 0; i < textures.length; i++) {
         sprite[i] = this.add
-          .sprite(i * 40 + 140, this.config.height - 200, textures[i])
+          .sprite(i * 40 + 350, this.config.height - 200, textures[i])
           .setOrigin(0, 0);
 
         sprite[i].setInteractive().on("pointerdown", () => {
