@@ -24,4 +24,6 @@ Technologies used in the creation of this game:
 
 You can also follow this link to the deployed version online:
 
+https://starcollector-dwec.herokuapp.com/
+
 
