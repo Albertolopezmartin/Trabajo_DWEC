@@ -1,6 +1,6 @@
 # STAR COLLECTOR
 
-In this game the goal is to collect as many stars as possible while avoiding the bombs that keep spawning, as touching one just once will result in a game over, so be careful!
+In this game the goal is to collect as many stars as possible while avoiding the bombs that spawn when you collect a star, as touching one just once will result in a game over, so be careful!
 
 Technologies used in the creation of this game: 
 
