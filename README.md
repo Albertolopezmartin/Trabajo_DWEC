@@ -4,10 +4,10 @@ In this game the goal is to collect as many stars as possible while avoiding the
 
 Technologies used in the creation of this game: 
 
-> Javascript
-> node.js
-> express
-> npm
+> Javascript |
+> node.js |
+> express |
+> npm |
 > Phaser 3
 
 # Local Installation Instructions
